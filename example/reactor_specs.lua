@@ -36,6 +36,11 @@ RuleRegistry.define(tags.damage_below, function(r, threshold)
     return r.damage <= threshold
 end)
 
+-- Example of a rule that takes multiple parameters (min and max)
+RuleRegistry.define("temperature_in_range", function(r, min, max)
+    return r.temperature >= min and r.temperature <= max
+end)
+
 --------------------------------------------------------------
 --- User-friendly specification constructors. 
 --- In a real application, you might want to add error handling, validation, or support for more complex specifications.
@@ -57,6 +62,13 @@ local function damage_below(max)
     return Specification:new(tags.damage_below, max)
 end
 
+-- Example user-friendly constructor that uses a registry rule with multiple params
+local function temperature_in_range(min, max)
+    return Specification.from("temperature_in_range", min, max)
+end
+
+-- Example constructor that wraps a raw predicate function with multiple parameters
+
 -------------------------------------------------------------
 -- Return the module with the user-friendly spec constructors
 -------------------------------------------------------------
@@ -66,4 +78,5 @@ return {
     has_enough_fuel = has_enough_fuel,
     has_enough_coolant = has_enough_coolant,
     damage_below = damage_below
+    ,temperature_in_range = temperature_in_range
 }
