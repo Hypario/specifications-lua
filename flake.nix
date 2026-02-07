@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
+    self.submodules = true;
   };
 
   outputs = { self, nixpkgs, flake-utils }:
@@ -21,7 +22,7 @@
           ];
         };
 
-        # ---------- Package (LuaRocks-style) ----------
-        packages.default = import ./default.nix { inherit pkgs; };
+        # ---------- Package ----------
+        packages.default = pkgs.callPackage ./package.nix {};
       });
 }
