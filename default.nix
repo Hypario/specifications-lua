@@ -17,5 +17,6 @@ pkgs.lua5_4.pkgs.buildLuaPackage {
   installPhase = ''
     mkdir -p $out/
     cp -r out/* $out/
+    rm -rf out
   '';
 }
